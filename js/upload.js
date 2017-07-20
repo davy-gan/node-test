@@ -2,11 +2,9 @@
 var path = require('path');
 var fs = require("fs");
 
-var bodyParser = require('body-parser');
 var multer  = require('multer');
 
 module.exports = function (app) {
-  app.use(bodyParser.urlencoded({ extended: false }));
   app.use(multer({ dest: '/tmp/'}).array('image'));
     app.get('/upload', function (req, res) {
     res.sendFile(path.join(__dirname,'..','/view/upload.html'));
