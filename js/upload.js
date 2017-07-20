@@ -5,7 +5,10 @@ var fs = require("fs");
 var multer  = require('multer');
 
 module.exports = function (app) {
-  app.use(multer({ dest: '/tmp/'}).array('image'));
+  // 以相对 入口文件 index.js建立文件夹
+  // app.use(multer({ dest: './uploads/'}).array('image'));
+  // 以绝对路径建立文件夹
+  app.use(multer({ dest: path.join(__dirname,'..','/uploads/')}).array('image'));
     app.get('/upload', function (req, res) {
     res.sendFile(path.join(__dirname,'..','/view/upload.html'));
   });
@@ -13,7 +16,6 @@ module.exports = function (app) {
   app.post('/upload', function (req, res) {
 
     console.log(req.files[0]);
-
     var file = path.join(__dirname,'..','/public/img',req.files[0].originalname);
     fs.readFile( req.files[0].path, function (err, data) {
       fs.writeFile(file, data, function (err) {
