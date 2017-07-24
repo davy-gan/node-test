@@ -9,7 +9,7 @@ module.exports = function (app) {
   // app.use(multer({ dest: './uploads/'}).array('image'));
   // 以绝对路径建立文件夹
   app.use(multer({ dest: path.join(__dirname,'..','/uploads/')}).array('image'));
-    app.get('/upload', function (req, res) {
+  app.get('/upload', function (req, res) {
     res.sendFile(path.join(__dirname,'..','/view/upload.html'));
   });
 
